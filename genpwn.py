@@ -32,17 +32,17 @@ class Pwn:
     def __init__(self):
         self.e = ELF("./{}")
 """.format(args.arch, args.os, args.endian, args.binary)
-    if args.libc is set:
+    if args.libc:
         scheme+="""        self.libc = ELF("./{}")
 """.format(args.libc)
     scheme+="""        self.p = None
 
     def start_binary(self):
 """
-    if args.libc is set:
-        scheme+="""        self.p = process("./{}", env={
+    if args.libc:
+        scheme+="""        self.p = process("./{}", env={{
             "LD_LIBRARY_PATH": os.path.dirname(os.path.abspath(__file__))
-        })
+        }})
 """.format(args.binary)
     else:
         scheme+="""        self.p = process("./{}")
