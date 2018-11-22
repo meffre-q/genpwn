@@ -47,6 +47,9 @@ class Pwn:
     else:
         scheme+="""        self.p = process("./{}")
 """.format(args.binary)
+    if args.remote:
+        scheme+="""        #self.p = remote("{}", {})
+""".format(args.remote, args.port)
     scheme+="""        self.p.recvuntil("...")
 
     def pwn_binary(self):
