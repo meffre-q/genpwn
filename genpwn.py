@@ -41,9 +41,9 @@ class Pwn:
 """
     if args.libc:
         scheme+="""        self.p = process("./{}", env={{
-            "LD_LIBRARY_PATH": os.path.dirname(os.path.abspath(__file__))
+            "LD_PRELOAD": "{}"
         }})
-""".format(args.binary)
+""".format(args.binary, args.libc)
     else:
         scheme+="""        self.p = process("./{}")
 """.format(args.binary)
